@@ -12,13 +12,9 @@ module.exports = {
       }
     }
   },
-  sass: {
-    src: src + '/styles/main.sass',
-    dest: dest + '/styles',
-    settings: {
-      indentedSyntax: false, // Enable .sass syntax?
-      imagePath: '/images' // Used by the image-url helper
-    }
+  styles: {
+    src: ['node_modules/todomvc-common/base.css', 'node_modules/todomvc-app-css/index.css'],
+    dest: dest + '/styles'
   },
   browserify: {
     src: src + '/js/index.js',
