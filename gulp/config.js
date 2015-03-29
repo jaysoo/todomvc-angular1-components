@@ -13,7 +13,7 @@ module.exports = {
     }
   },
   styles: {
-    src: ['node_modules/todomvc-common/base.css', 'node_modules/todomvc-app-css/index.css'],
+    src: [src + '/styles/*.css', 'node_modules/todomvc-common/base.css', 'node_modules/todomvc-app-css/index.css'],
     dest: dest + '/styles'
   },
   browserify: {

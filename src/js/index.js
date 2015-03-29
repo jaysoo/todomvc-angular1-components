@@ -8,6 +8,7 @@ import todoItem from './directives/todo-item';
 import createTodoForm from './directives/create-todo-form';
 import todoCount from './directives/todo-count';
 import todoFilters from './directives/todo-filters';
+import TodoService from './services/TodoService';
 
 m.directive('todoApp', todoApp);
 m.directive('todoList', todoList);
@@ -15,6 +16,7 @@ m.directive('todoItem', todoItem);
 m.directive('createTodoForm', createTodoForm);
 m.directive('todoCount', todoCount);
 m.directive('todoFilters', todoFilters);
+m.service('todoService', TodoService);
 
 angular.bootstrap(document.body, [m.name]);
 

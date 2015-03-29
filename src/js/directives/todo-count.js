@@ -8,6 +8,10 @@ const todoCount = () => ({
       <ng-pluralize count="ctrl.todos.length" when="{ one: 'item left', other: 'items left' }"></ng-pluralize>
     </span>
   `,
+  controller: class {
+    constructor() {
+    }
+  },
   restrict: 'E',
   bindToController: true,
   controllerAs: 'ctrl'

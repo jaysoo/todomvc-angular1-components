@@ -1,12 +1,13 @@
 const todoList = () => ({
   scope: {
     todos: '=',
+    onSave: '&',
     onDone: '&'
   },
   template: `
     <ul class="todo-list">
       <li ng-repeat="todo in ctrl.todos">
-        <todo-item todo="todo" on-done="ctrl.onDone(todo)" />
+        <todo-item todo="todo" on-save="ctrl.onSave(todo)" on-done="ctrl.onDone(todo)" />
       </li>
     </ul>
   `,

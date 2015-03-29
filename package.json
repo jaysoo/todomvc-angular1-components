@@ -42,7 +42,7 @@
     "flummox": "2.11.0",
     "gulp-install": "^0.2.0",
     "lodash": "3.2.0",
-    "node-uuid": "1.4.2",
+    "node-uuid": "^1.4.2",
     "todomvc-app-css": "^2.0.1",
     "todomvc-common": "^1.0.1"
   }

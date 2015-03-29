@@ -2,26 +2,35 @@ import _ from 'lodash';
 
 const todoApp = () => ({
   template: `
-    <section class="todoapp">
-      <header class="header">
-				<h1>todos</h1>
-        <create-todo-form on-add="ctrl.addTodo(todo)"></create-todo-form>
-      </header>
+    <div>
+      <section class="todoapp">
+        <header class="header">
+          <h1>todos</h1>
+          <create-todo-form on-add="ctrl.addTodo(todo)"></create-todo-form>
+        </header>
 
-			<section class="main">
-        <todo-list todos="ctrl.todos" on-done="ctrl.updateTodos()"></todo-list>
+        <section class="main">
+          <todo-list todos="ctrl.todos"
+                on-done="ctrl.updateTodos()"
+                on-save="ctrl.saveTodo(todo)"></todo-list>
+        </section>
+        <footer class="footer">
+          <todo-count todos="ctrl.todos"></todo-count>
+          <todo-filters types="['all', 'active', 'completed']" on-filter="ctrl.updateFilter(filter)"></todo-filters>
+        </footer>
       </section>
-      <footer class="footer">
-			  <todo-count todos="ctrl.todos"></todo-count>
-        <todo-filters types="['all', 'active', 'completed']" on-filter="ctrl.updateFilter(filter)"></todo-filters>
+      <footer class="info">
+        <p>Double-click to edit a todo</p>
       </footer>
-    </section>
+    </div>
   `,
   controller: class {
-    constructor() {
-      this.allTodos = [];
+    constructor(todoService) {
       this.filter = 'all';
+      this.todoService = todoService;
       this.updateTodos();
+
+      this.allTodos = todoService.all();
     }
 
     updateTodos() {
@@ -38,9 +47,17 @@ const todoApp = () => ({
     }
 
     addTodo(todo) {
-      this.allTodos.push(todo);
+      this.todoService.create(todo);
+      this.allTodos = this.todoService.all();
       this.updateTodos();
     }
+
+    saveTodo(todo) {
+      this.todoService.update(todo);
+      this.allTodos = this.todoService.all();
+      this.updateTodos();
+    }
+
 
     updateFilter(filter) {
       this.filter = filter;
