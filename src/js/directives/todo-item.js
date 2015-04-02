@@ -34,7 +34,7 @@ const todoItem = () => ({
 
     edit() {
       this.todoForm = _.extend({}, this.todo);
-      setTimeout(() => this.editInput.focus(), 100);
+      setTimeout(() => this.editInput.focus(), 0);
     }
 
     cancelEdit() {

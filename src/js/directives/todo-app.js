@@ -11,13 +11,13 @@ const todoApp = () => ({
 
         <section class="main">
           <todo-list todos="ctrl.todos"
-                on-done="ctrl.updateTodos(todo)"
+                on-done="ctrl.handleDone(todo)"
                 on-save="ctrl.handleSave(todo)"
                 on-destroy="ctrl.handleDestroy(todo)">
           </todo-list>
         </section>
         <footer class="footer">
-          <todo-count todos="ctrl.todos"></todo-count>
+          <todo-count todos="ctrl.allTodos"></todo-count>
           <todo-filters types="['all', 'active', 'completed']" on-filter="ctrl.updateFilter(filter)"></todo-filters>
         </footer>
       </section>
@@ -50,6 +50,13 @@ const todoApp = () => ({
 
     handleAdd(todo) {
       this.todoService.create(todo);
+      this.allTodos = this.todoService.all();
+      this.updateTodos();
+    }
+
+    handleDone(todo) {
+      todo.done = true;
+      this.todoService.update(todo);
       this.allTodos = this.todoService.all();
       this.updateTodos();
     }
