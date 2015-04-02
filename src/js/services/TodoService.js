@@ -26,7 +26,7 @@ class TodoService {
 
   destroy(todo) {
     const toDestroy = _.find(this._todos, {id: todo.id});
-    this._todos = _.without(todos, toDestroy);
+    this._todos = _.without(this._todos, toDestroy);
   }
 }
 

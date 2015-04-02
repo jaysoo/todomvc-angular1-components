@@ -1,18 +1,31 @@
 const todoList = () => ({
   scope: {
     todos: '=',
-    onSave: '&',
-    onDone: '&'
+    doneCallback: '&onDone',
+    saveCallback: '&onSave',
+    destroyCallback: '&onDestroy'
   },
   template: `
     <ul class="todo-list">
       <li ng-repeat="todo in ctrl.todos">
-        <todo-item todo="todo" on-save="ctrl.onSave(todo)" on-done="ctrl.onDone(todo)" />
+        <todo-item todo="todo"
+                   on-done="ctrl.handleDone(todo)"
+                   on-save="ctrl.handleSave(todo)"
+                   on-destroy="ctrl.handleDestroy(todo)" />
       </li>
     </ul>
   `,
   controller: class {
-    constructor() {
+    handleDone(todo) {
+      this.doneCallback({todo: todo});
+    }
+
+    handleSave(todo) {
+      this.saveCallback({todo: todo});
+    }
+
+    handleDestroy(todo) {
+      this.destroyCallback({todo: todo});
     }
   },
   restrict: 'E',

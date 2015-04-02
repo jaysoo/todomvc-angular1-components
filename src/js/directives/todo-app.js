@@ -6,13 +6,15 @@ const todoApp = () => ({
       <section class="todoapp">
         <header class="header">
           <h1>todos</h1>
-          <create-todo-form on-add="ctrl.addTodo(todo)"></create-todo-form>
+          <create-todo-form on-add="ctrl.handleAdd(todo)"></create-todo-form>
         </header>
 
         <section class="main">
           <todo-list todos="ctrl.todos"
-                on-done="ctrl.updateTodos()"
-                on-save="ctrl.saveTodo(todo)"></todo-list>
+                on-done="ctrl.updateTodos(todo)"
+                on-save="ctrl.handleSave(todo)"
+                on-destroy="ctrl.handleDestroy(todo)">
+          </todo-list>
         </section>
         <footer class="footer">
           <todo-count todos="ctrl.todos"></todo-count>
@@ -46,18 +48,23 @@ const todoApp = () => ({
       }
     }
 
-    addTodo(todo) {
+    handleAdd(todo) {
       this.todoService.create(todo);
       this.allTodos = this.todoService.all();
       this.updateTodos();
     }
 
-    saveTodo(todo) {
+    handleSave(todo) {
       this.todoService.update(todo);
       this.allTodos = this.todoService.all();
       this.updateTodos();
     }
 
+    handleDestroy(todo) {
+      this.todoService.destroy(todo);
+      this.allTodos = this.todoService.all();
+      this.updateTodos();
+    }
 
     updateFilter(filter) {
       this.filter = filter;

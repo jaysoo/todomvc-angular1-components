@@ -3,8 +3,9 @@ import _ from 'lodash';
 const todoItem = () => ({
   scope: {
     todo: '=',
-    onDone: '&',
-    onSave: '&'
+    doneCallback: '&onDone',
+    saveCallback: '&onSave',
+    destroyCallback: '&onDestroy'
   },
   template: `
     <div ng-class="{'editing': ctrl.todoForm}">
@@ -12,13 +13,14 @@ const todoItem = () => ({
         <input class="toggle"
                type="checkbox"
                ng-model="ctrl.todo.done"
-               ng-change="ctrl.markComplete(ctrl.todo)" />
-        <label ng-dblclick="ctrl.editTodo(ctrl.todo)">
+               ng-change="ctrl.handleDone()" />
+        <label ng-dblclick="ctrl.edit()">
           {{ctrl.todo.title}}
         </label>
-        <button class="destroy"></button>
+        <button class="destroy"
+                ng-click="ctrl.handleDestroy()"></button>
       </div>
-      <form ng-submit="ctrl.saveEdit(ctrl.todo)">
+      <form ng-submit="ctrl.handleSave()">
         <input class="edit" ng-model="ctrl.todoForm.title"
                ng-blur="ctrl.cancelEdit()"
                ng-keyup="ctrl.handleKeyUp($event)" />
@@ -30,23 +32,26 @@ const todoItem = () => ({
       this.editInput = $element.find('input')[1];
     }
 
-    editTodo(todo) {
+    edit() {
       this.todoForm = _.extend({}, this.todo);
-
       setTimeout(() => this.editInput.focus(), 100);
-    }
-
-    markComplete(todo) {
-      this.onDone({ todo: todo });
-    }
-
-    saveEdit(todo) {
-      this.todoForm = null;
-      this.onSave({ todo: todo });
     }
 
     cancelEdit() {
       this.todoForm = null;
+    }
+
+    handleDone() {
+      this.doneCallback({todo: this.todo});
+    }
+
+    handleSave() {
+      this.saveCallback({todo: this.todoForm});
+      this.todoForm = null;
+    }
+
+    handleDestroy() {
+      this.destroyCallback({todo: this.todo});
     }
 
     handleKeyUp(evt) {
