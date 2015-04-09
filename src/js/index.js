@@ -9,6 +9,7 @@ import createTodoForm from './directives/create-todo-form';
 import todoCount from './directives/todo-count';
 import todoFilters from './directives/todo-filters';
 import TodoService from './services/TodoService';
+import TodoLocalStorage from './storage/TodoLocalStorage';
 
 m.directive('todoApp', todoApp);
 m.directive('todoList', todoList);
@@ -18,6 +19,7 @@ m.directive('todoCount', todoCount);
 m.directive('todoFilters', todoFilters);
 
 m.service('todoService', TodoService);
+m.service('todoStorage', TodoLocalStorage);
 
 angular.bootstrap(document.body, [m.name]);
 

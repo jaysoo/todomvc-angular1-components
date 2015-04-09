@@ -30,12 +30,11 @@ const todoApp = () => ({
     constructor(todoService) {
       this.filter = 'all';
       this.todoService = todoService;
-      this.updateTodos();
-
       this.allTodos = todoService.all();
+      this.updateState();
     }
 
-    updateTodos() {
+    updateState() {
       switch (this.filter) {
         case 'active':
           this.todos = _.filter(this.allTodos, t => !t.done);
@@ -51,31 +50,31 @@ const todoApp = () => ({
     handleAdd(todo) {
       this.todoService.create(todo);
       this.allTodos = this.todoService.all();
-      this.updateTodos();
+      this.updateState();
     }
 
     handleDone(todo) {
       todo.done = true;
       this.todoService.update(todo);
       this.allTodos = this.todoService.all();
-      this.updateTodos();
+      this.updateState();
     }
 
     handleSave(todo) {
       this.todoService.update(todo);
       this.allTodos = this.todoService.all();
-      this.updateTodos();
+      this.updateState();
     }
 
     handleDestroy(todo) {
       this.todoService.destroy(todo);
       this.allTodos = this.todoService.all();
-      this.updateTodos();
+      this.updateState();
     }
 
     updateFilter(filter) {
       this.filter = filter;
-      this.updateTodos();
+      this.updateState();
     }
   },
   restrict: 'E',

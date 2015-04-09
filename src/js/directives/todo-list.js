@@ -7,7 +7,7 @@ const todoList = () => ({
   },
   template: `
     <ul class="todo-list">
-      <li ng-repeat="todo in ctrl.todos">
+      <li ng-repeat="todo in ctrl.todos track by todo.id">
         <todo-item todo="todo"
                    on-done="ctrl.handleDone(todo)"
                    on-save="ctrl.handleSave(todo)"
