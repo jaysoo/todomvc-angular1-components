@@ -3,7 +3,7 @@ import _ from 'lodash';
 const todoItem = () => ({
   scope: {
     todo: '=',
-    doneCallback: '&onDone',
+    updateCallback: '&onUpdate',
     saveCallback: '&onSave',
     destroyCallback: '&onDestroy'
   },
@@ -12,8 +12,8 @@ const todoItem = () => ({
       <div class="view">
         <input class="toggle"
                type="checkbox"
-               ng-model="ctrl.todo.done"
-               ng-change="ctrl.handleDone()" />
+               ng-model="ctrl.todo.completed"
+               ng-change="ctrl.handleUpdate()" />
         <label ng-dblclick="ctrl.edit()">
           {{ctrl.todo.title}}
         </label>
@@ -21,7 +21,9 @@ const todoItem = () => ({
                 ng-click="ctrl.handleDestroy()"></button>
       </div>
       <form ng-submit="ctrl.handleSave()">
-        <input class="edit" ng-model="ctrl.todoForm.title"
+        <input name="title"
+               class="edit"
+               ng-model="ctrl.todoForm.title"
                ng-blur="ctrl.cancelEdit()"
                ng-keyup="ctrl.handleKeyUp($event)" />
       </form>
@@ -41,8 +43,8 @@ const todoItem = () => ({
       this.todoForm = null;
     }
 
-    handleDone() {
-      this.doneCallback({todo: this.todo});
+    handleUpdate() {
+      this.updateCallback({todo: this.todo});
     }
 
     handleSave() {

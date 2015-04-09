@@ -10,14 +10,14 @@ const todoApp = () => ({
         </header>
 
         <section class="main">
-          <todo-list todos="ctrl.todos"
-                on-done="ctrl.handleDone(todo)"
+          <todo-list todos="ctrl._filteredTodos"
+                on-update="ctrl.handleUpdate(todo)"
                 on-save="ctrl.handleSave(todo)"
                 on-destroy="ctrl.handleDestroy(todo)">
           </todo-list>
         </section>
         <footer class="footer">
-          <todo-count todos="ctrl.allTodos"></todo-count>
+          <todo-count todos="ctrl._activeTodos"></todo-count>
           <todo-filters types="['all', 'active', 'completed']" on-filter="ctrl.updateFilter(filter)"></todo-filters>
         </footer>
       </section>
@@ -30,45 +30,46 @@ const todoApp = () => ({
     constructor(todoService) {
       this.filter = 'all';
       this.todoService = todoService;
-      this.allTodos = todoService.all();
+      this._todos = todoService.all();
       this.updateState();
     }
 
     updateState() {
+      this._activeTodos = _.filter(this._todos, t => !t.completed);
+
       switch (this.filter) {
         case 'active':
-          this.todos = _.filter(this.allTodos, t => !t.done);
+          this._filteredTodos = _.filter(this._todos, t => !t.completed);
           break;
         case 'completed':
-          this.todos = _.filter(this.allTodos, t => t.done);
+          this._filteredTodos = _.filter(this._todos, t => t.completed);
           break;
         default:
-          this.todos = this.allTodos;
+          this._filteredTodos = this._todos;
       }
     }
 
     handleAdd(todo) {
       this.todoService.create(todo);
-      this.allTodos = this.todoService.all();
+      this._todos = this.todoService.all();
       this.updateState();
     }
 
-    handleDone(todo) {
-      todo.done = true;
+    handleUpdate(todo) {
       this.todoService.update(todo);
-      this.allTodos = this.todoService.all();
+      this._todos = this.todoService.all();
       this.updateState();
     }
 
     handleSave(todo) {
       this.todoService.update(todo);
-      this.allTodos = this.todoService.all();
+      this._todos = this.todoService.all();
       this.updateState();
     }
 
     handleDestroy(todo) {
       this.todoService.destroy(todo);
-      this.allTodos = this.todoService.all();
+      this._todos = this.todoService.all();
       this.updateState();
     }
 

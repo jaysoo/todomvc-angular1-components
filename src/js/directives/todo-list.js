@@ -1,7 +1,7 @@
 const todoList = () => ({
   scope: {
     todos: '=',
-    doneCallback: '&onDone',
+    updateCallback: '&onUpdate',
     saveCallback: '&onSave',
     destroyCallback: '&onDestroy'
   },
@@ -9,15 +9,15 @@ const todoList = () => ({
     <ul class="todo-list">
       <li ng-repeat="todo in ctrl.todos track by todo.id">
         <todo-item todo="todo"
-                   on-done="ctrl.handleDone(todo)"
+                   on-update="ctrl.handleUpdate(todo)"
                    on-save="ctrl.handleSave(todo)"
                    on-destroy="ctrl.handleDestroy(todo)" />
       </li>
     </ul>
   `,
   controller: class {
-    handleDone(todo) {
-      this.doneCallback({todo: todo});
+    handleUpdate(todo) {
+      this.updateCallback({todo: todo});
     }
 
     handleSave(todo) {
