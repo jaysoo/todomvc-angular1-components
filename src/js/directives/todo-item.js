@@ -8,7 +8,7 @@ const todoItem = () => ({
     destroyCallback: '&onDestroy'
   },
   template: `
-    <div ng-class="{'editing': ctrl.todoForm}">
+    <div ng-class="{'editing': ctrl.todoForm, 'completed': ctrl.todo.completed}">
       <div class="view">
         <input class="toggle"
                type="checkbox"

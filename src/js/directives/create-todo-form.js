@@ -1,9 +1,9 @@
 const createTodoForm = () => ({
   scope: {
-    onAdd: '&'
+    createCallback: '&onCreate'
   },
   template: `
-    <form ng-submit="ctrl.handleOnAdd(ctrl.todoForm)">
+    <form ng-submit="ctrl.handleCreate(ctrl.todoForm)">
       <input class="new-todo"
              type="text"
              ng-model="ctrl.todoForm.title"
@@ -14,12 +14,16 @@ const createTodoForm = () => ({
   `,
   controller: class {
     constructor() {
+      this.reset();
+    }
+
+    reset() {
       this.todoForm = {};
     }
 
-    handleOnAdd(todo) {
-      this.onAdd({todo: todo});
-      this.todoForm = {};
+    handleCreate(todo) {
+      this.createCallback({todo: todo});
+      this.reset();
     }
   },
   restrict: 'E',

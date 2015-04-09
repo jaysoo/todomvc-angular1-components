@@ -12,3 +12,8 @@
 .todo-list li label {
   white-space: normal;
 }
+
+.todo-list .completed {
+  text-decoration: line-through;
+  color: #ccc;
+}
