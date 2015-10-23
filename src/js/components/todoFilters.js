@@ -1,14 +1,15 @@
 const todoFilters = () => ({
   scope: {
     types: '=',
+    selected: "=",
     onFilter: '&'
   },
   template: `
     <ul class="filters">
       <li ng-repeat="type in todoFilters.types">
-        <a
-          href="#" ng-click="todoFilters.handleFilter(type)"
-          ng-class="{'selected': todoFilters.filter == type}">
+        <a href="#"
+           ng-click="todoFilters.handleFilter(type)"
+           ng-class="{'selected': todoFilters.selected == type}">
           {{type}}
         </a>
       </li>
@@ -16,11 +17,9 @@ const todoFilters = () => ({
   `,
   controller: class {
     constructor() {
-      this.filter = this.types[0];
     }
 
     handleFilter(filter) {
-      this.filter = filter;
       this.onFilter({ filter });
     }
   },

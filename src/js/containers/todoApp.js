@@ -18,7 +18,9 @@ const todoApp = () => ({
         </section>
         <footer class="footer">
           <todo-count todos="todoApp._activeTodos"></todo-count>
-          <todo-filters types="['all', 'active', 'completed']" selected="" on-filter="todoApp.updateFilter(filter)"></todo-filters>
+          <todo-filters types="['all', 'active', 'completed']"
+                        selected="todoApp.selectedFilter"
+                        on-filter="todoApp.updateFilter(filter)"></todo-filters>
         </footer>
       </section>
       <footer class="info">
@@ -28,7 +30,7 @@ const todoApp = () => ({
   `,
   controller: class {
     constructor(todoService) {
-      this.filter = 'all';
+      this.selectedFilter = 'all';
       this.todoService = todoService;
       this._todos = todoService.all();
       this.updateState();
@@ -37,7 +39,7 @@ const todoApp = () => ({
     updateState() {
       this._activeTodos = _.filter(this._todos, t => !t.completed);
 
-      switch (this.filter) {
+      switch (this.selectedFilter) {
         case 'active':
           this._filteredTodos = _.filter(this._todos, t => !t.completed);
           break;
@@ -74,7 +76,7 @@ const todoApp = () => ({
     }
 
     updateFilter(filter) {
-      this.filter = filter;
+      this.selectedFilter = filter;
       this.updateState();
     }
   },
