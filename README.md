@@ -11,5 +11,7 @@ npm install
 Run server:
 
 ```
-npm run
+npm start
 ```
+
+Now browser to http://localhost:8081/
