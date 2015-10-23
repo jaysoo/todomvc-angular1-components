@@ -3,10 +3,10 @@ const createTodoForm = () => ({
     onAdd: '&'
   },
   template: `
-    <form ng-submit="ctrl.handleOnAdd(ctrl.todoForm)">
+    <form ng-submit="createTodoForm.handleOnAdd(createTodoForm.todoForm)">
       <input class="new-todo"
              type="text"
-             ng-model="ctrl.todoForm.title"
+             ng-model="createTodoForm.todoForm.title"
              placeholder="What needs to be done?"
              autofocus />
       </label>
@@ -24,7 +24,7 @@ const createTodoForm = () => ({
   },
   restrict: 'E',
   bindToController: true,
-  controllerAs: 'ctrl'
+  controllerAs: 'createTodoForm'
 });
 
 export default createTodoForm;
