@@ -10,11 +10,11 @@ var babelify = require("babelify");
 var watchify = require('watchify');
 var connect = require('gulp-connect');
 var source = require('vinyl-source-stream');
-var objectAssign = require('react/lib/Object.assign');
+var _ = require('lodash');
 
 var config = require('../config').browserify;
 
-var bundler = browserify(objectAssign({ debug: true }, watchify.args)).
+var bundler = browserify(_.assign({ debug: true }, watchify.args)).
       // Transform ES6 to ES5 using babel.
       transform(
         babelify.configure({

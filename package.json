@@ -24,7 +24,6 @@
     "karma-phantomjs-launcher": "~0.1.4",
     "karma-source-map-support": "~1.0.0",
     "mocha": "~2.1.0",
-    "react": "^0.13.3",
     "regenerator": "~0.8.11",
     "require-dir": "~0.1.0",
     "sinon": "^1.12.2",
