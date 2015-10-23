@@ -4,8 +4,8 @@ const todoCount = () => ({
   },
   template: `
     <span class="todo-count">
-      <strong>{{ctrl.todos.length}}</strong>
-      <ng-pluralize count="ctrl.todos.length" when="{ one: 'item left', other: 'items left' }"></ng-pluralize>
+      <strong>{{todoCount.todos.length}}</strong>
+      <ng-pluralize count="todoCount.todos.length" when="{ one: 'item left', other: 'items left' }"></ng-pluralize>
     </span>
   `,
   controller: class {
@@ -14,7 +14,7 @@ const todoCount = () => ({
   },
   restrict: 'E',
   bindToController: true,
-  controllerAs: 'ctrl'
+  controllerAs: 'todoCount'
 });
 
 export default todoCount;

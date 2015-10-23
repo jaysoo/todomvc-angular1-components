@@ -8,24 +8,24 @@ const todoItem = () => ({
     onDestroy: '&'
   },
   template: `
-    <div ng-class="{'editing': ctrl.todoForm}">
+    <div ng-class="{'editing': todoItem.todoForm}">
       <div class="view">
         <input class="toggle"
                type="checkbox"
-               ng-model="ctrl.todo.completed"
-               ng-change="ctrl.handleUpdate()" />
-        <label ng-dblclick="ctrl.edit()">
-          {{ctrl.todo.title}}
+               ng-model="todoItem.todo.completed"
+               ng-change="todoItem.handleUpdate()" />
+        <label ng-dblclick="todoItem.edit()">
+          {{todoItem.todo.title}}
         </label>
         <button class="destroy"
-                ng-click="ctrl.handleDestroy()"></button>
+                ng-click="todoItem.handleDestroy()"></button>
       </div>
-      <form ng-submit="ctrl.handleSave()">
+      <form ng-submit="todoItem.handleSave()">
         <input name="title"
                class="edit"
-               ng-model="ctrl.todoForm.title"
-               ng-blur="ctrl.cancelEdit()"
-               ng-keyup="ctrl.handleKeyUp($event)" />
+               ng-model="todoItem.todoForm.title"
+               ng-blur="todoItem.cancelEdit()"
+               ng-keyup="todoItem.handleKeyUp($event)" />
       </form>
     </div>
   `,
@@ -64,7 +64,7 @@ const todoItem = () => ({
   },
   restrict: 'E',
   bindToController: true,
-  controllerAs: 'ctrl'
+  controllerAs: 'todoItem'
 });
 
 export default todoItem;

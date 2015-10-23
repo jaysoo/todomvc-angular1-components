@@ -5,10 +5,10 @@ const todoFilters = () => ({
   },
   template: `
     <ul class="filters">
-      <li ng-repeat="type in ctrl.types">
+      <li ng-repeat="type in todoFilters.types">
         <a
-          href="#" ng-click="ctrl.handleFilter(type)"
-          ng-class="{'selected': ctrl.filter == type}">
+          href="#" ng-click="todoFilters.handleFilter(type)"
+          ng-class="{'selected': todoFilters.filter == type}">
           {{type}}
         </a>
       </li>
@@ -21,12 +21,12 @@ const todoFilters = () => ({
 
     handleFilter(filter) {
       this.filter = filter;
-      this.onFilter({filter: filter});
+      this.onFilter({ filter });
     }
   },
   restrict: 'E',
   bindToController: true,
-  controllerAs: 'ctrl'
+  controllerAs: 'todoFilters'
 });
 
 export default todoFilters;

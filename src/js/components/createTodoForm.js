@@ -18,7 +18,7 @@ const createTodoForm = () => ({
     }
 
     handleOnAdd(todo) {
-      this.onAdd({todo: todo});
+      this.onAdd({ todo });
       this.todoForm = {};
     }
   },

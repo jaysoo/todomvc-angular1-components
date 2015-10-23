@@ -6,19 +6,19 @@ const todoApp = () => ({
       <section class="todoapp">
         <header class="header">
           <h1>todos</h1>
-          <create-todo-form on-add="ctrl.handleAdd(todo)"></create-todo-form>
+          <create-todo-form on-add="todoApp.handleAdd(todo)"></create-todo-form>
         </header>
 
         <section class="main">
-          <todo-list todos="ctrl._filteredTodos"
-                on-update="ctrl.handleUpdate(todo)"
-                on-save="ctrl.handleSave(todo)"
-                on-destroy="ctrl.handleDestroy(todo)">
+          <todo-list todos="todoApp._filteredTodos"
+                on-update="todoApp.handleUpdate(todo)"
+                on-save="todoApp.handleSave(todo)"
+                on-destroy="todoApp.handleDestroy(todo)">
           </todo-list>
         </section>
         <footer class="footer">
-          <todo-count todos="ctrl._activeTodos"></todo-count>
-          <todo-filters types="['all', 'active', 'completed']" on-filter="ctrl.updateFilter(filter)"></todo-filters>
+          <todo-count todos="todoApp._activeTodos"></todo-count>
+          <todo-filters types="['all', 'active', 'completed']" selected="" on-filter="todoApp.updateFilter(filter)"></todo-filters>
         </footer>
       </section>
       <footer class="info">
@@ -80,7 +80,7 @@ const todoApp = () => ({
   },
   restrict: 'E',
   bindToController: true,
-  controllerAs: 'ctrl'
+  controllerAs: 'todoApp'
 });
 
 export default todoApp;
