@@ -3,9 +3,9 @@ import _ from 'lodash';
 const todoItem = () => ({
   scope: {
     todo: '=',
-    updateCallback: '&onUpdate',
-    saveCallback: '&onSave',
-    destroyCallback: '&onDestroy'
+    onUpdate: '&',
+    onSave: '&',
+    onDestroy: '&'
   },
   template: `
     <div ng-class="{'editing': ctrl.todoForm}">
@@ -44,16 +44,16 @@ const todoItem = () => ({
     }
 
     handleUpdate() {
-      this.updateCallback({todo: this.todo});
+      this.onUpdate({todo: this.todo});
     }
 
     handleSave() {
-      this.saveCallback({todo: this.todoForm});
+      this.onSave({todo: this.todoForm});
       this.todoForm = null;
     }
 
     handleDestroy() {
-      this.destroyCallback({todo: this.todo});
+      this.onDestroy({todo: this.todo});
     }
 
     handleKeyUp(evt) {

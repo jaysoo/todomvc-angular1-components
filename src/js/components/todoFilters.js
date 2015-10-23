@@ -1,7 +1,7 @@
 const todoFilters = () => ({
   scope: {
     types: '=',
-    filterCallback: '&onFilter'
+    onFilter: '&'
   },
   template: `
     <ul class="filters">
@@ -21,7 +21,7 @@ const todoFilters = () => ({
 
     handleFilter(filter) {
       this.filter = filter;
-      this.filterCallback({filter: filter});
+      this.onFilter({filter: filter});
     }
   },
   restrict: 'E',

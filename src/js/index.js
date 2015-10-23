@@ -2,13 +2,16 @@ import angular from 'angular';
 
 const m = angular.module('app', []);
 
-import todoApp from './directives/todo-app';
-import todoList from './directives/todo-list';
-import todoItem from './directives/todo-item';
-import createTodoForm from './directives/create-todo-form';
-import todoCount from './directives/todo-count';
-import todoFilters from './directives/todo-filters';
+import todoApp from './containers/todoApp';
+
+import todoList from './components/todoList';
+import todoItem from './components/todoItem';
+import createTodoForm from './components/createTodoForm';
+import todoCount from './components/todoCount';
+import todoFilters from './components/todoFilters';
+
 import TodoService from './services/TodoService';
+
 import TodoLocalStorage from './storage/TodoLocalStorage';
 
 m.directive('todoApp', todoApp);

@@ -1,9 +1,9 @@
 const todoList = () => ({
   scope: {
     todos: '=',
-    updateCallback: '&onUpdate',
-    saveCallback: '&onSave',
-    destroyCallback: '&onDestroy'
+    onUpdate: '&',
+    onSave: '&',
+    onDestroy: '&'
   },
   template: `
     <ul class="todo-list">
@@ -17,15 +17,15 @@ const todoList = () => ({
   `,
   controller: class {
     handleUpdate(todo) {
-      this.updateCallback({todo: todo});
+      this.onUpdate({todo: todo});
     }
 
     handleSave(todo) {
-      this.saveCallback({todo: todo});
+      this.onSave({todo: todo});
     }
 
     handleDestroy(todo) {
-      this.destroyCallback({todo: todo});
+      this.onDestroy({todo: todo});
     }
   },
   restrict: 'E',
